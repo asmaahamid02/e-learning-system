@@ -20,8 +20,6 @@ class CreateCoursesTable extends Migration
             $table->text('description');
             $table->integer('credits_number');
             $table->decimal('price');
-            $table->array('instructors');
-            $table->array('students');
             $table->timestamps();
         });
     }
