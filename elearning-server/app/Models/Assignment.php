@@ -22,6 +22,6 @@ class Assignment extends Model
 
     public function students()
     {
-        return $this->belongsToMany(User::class, 'users', 'assignment_id', 'student_id');
+        return $this->belongsToMany(User::class, 'users', 'assignment_id', 'student_id')->withPivot(['assignment_file'])->withTimestamps();
     }
 }
