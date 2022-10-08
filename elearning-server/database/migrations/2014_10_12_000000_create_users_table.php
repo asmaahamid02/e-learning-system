@@ -21,9 +21,6 @@ class CreateUsersTable extends Migration
             $table->string('phone_number');
             $table->string('gender');
             $table->string('role')->default('student');
-            $table->array('instructor_courses');
-            $table->array('student_courses');
-            $table->array('student_assignments');
             $table->timestamps();
         });
     }
