@@ -45,6 +45,12 @@ Route::group(['middleware' => ['jwt.verify']], function () {
             Route::get('assign/student/{student_id}/{course_id}', [CourseController::class, 'assignStudentToCourse']);
         });
         ###########End instructor Role group###########
+
+        ###########Start student Role group###########
+        Route::group(['midleware' => 'role:student'], function () {
+            Route::get('get_courses', [CourseController::class, 'getEnrolledCourses']);
+        });
+        ###########End student Role group###########
     });
     ###########End courses group###########
 
@@ -54,13 +60,19 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         ###########Start instructor Role group###########
         Route::group(['midleware' => 'role:instructor'], function () {
             Route::post('add_assignment', [AssignmentController::class, 'addAssignment']);
-            Route::get('get_assignment/{path}', [AssignmentController::class, 'getAssignment']);
+            Route::get('get_assignment/{path}', [AssignmentController::class, 'getAssignmentFile']);
         });
         ###########End instructor Role group###########
 
         ###########Start student Role group###########
         Route::group(['midleware' => 'role:student'], function () {
             Route::post('submit_assignment/{id}', [AssignmentController::class, 'submitAssignment']);
+        });
+        ###########End student Role group###########
+
+        ###########Start All Roles group###########
+        Route::group(['midleware' => 'role:student, instructor'], function () {
+            Route::get('/', [AssignmentController::class, 'getAssignments']);
         });
         ###########End student Role group###########
     });
