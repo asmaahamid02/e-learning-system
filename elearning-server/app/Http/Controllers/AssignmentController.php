@@ -65,7 +65,7 @@ class AssignmentController extends Controller
         ];
     }
 
-    public function getAssignment($file)
+    public function getAssignmentFile($file)
     {
         return response(asset('storage/users/assignments/' . $file), 200);
     }
@@ -119,6 +119,24 @@ class AssignmentController extends Controller
             'data' => null,
             'message' => 'Only students can submit assignments',
             'status' =>  Response::HTTP_FORBIDDEN
+        ]);
+    }
+
+    public function getAssignments()
+    {
+        $assignments = Assignment::orderBy('deadline')->with('instructors')->get();
+
+        if ($assignments->isNotEmpty()) {
+            return response()->json([
+                'data' => $assignments,
+                'message' => 'Assignments found',
+                'status' =>  Response::HTTP_OK
+            ]);
+        }
+        return response()->json([
+            'data' => null,
+            'message' => 'No Assignments found',
+            'status' =>  Response::HTTP_NOT_FOUND
         ]);
     }
 }
