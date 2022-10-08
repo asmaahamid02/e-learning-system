@@ -1,17 +1,40 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
 Route::group(['middleware' => ['jwt.verify']], function () {
-    Route::post('logout', [AuthController::class, 'logout']);
 
-    Route::group(['middleware' => 'role:admin,instructor'], function () {
-        Route::post('add_user', [UserController::class, 'addUser']);
+    ###########Start users group###########
+    Route::group(['prefix' => 'users'], function () {
+
+        ###########Start admin, instructor roles group###########
+        Route::group(['middleware' => 'role:admin, instructor'], function () {
+            Route::post('add_user', [UserController::class, 'addUser']);
+        });
+        ###########Start admin, instructor roles group###########
+
+        ###########Start admin,instructor,student roles group###########
+        Route::group(['midleware' => 'role:admin,instructor,student'], function () {
+            Route::post('logout', [AuthController::class, 'logout']);
+        });
+        ###########Start Admin admin,instructor,student roles group###########
     });
+    ###########End users group###########
+
+    ###########Start courses group###########
+    Route::group(['prefix' => 'courses'], function () {
+
+        ###########Start Admin Role group###########
+        Route::group(['middleware' => 'role:admin'], function () {
+            Route::post('add_course', [CourseController::class, 'addCourse']);
+        });
+        ###########End Admin Role group###########
+    });
+    ###########End courses group###########
 });
