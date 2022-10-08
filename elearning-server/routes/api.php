@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
@@ -31,10 +32,24 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::group(['prefix' => 'courses'], function () {
 
         ###########Start Admin Role group###########
-        Route::group(['middleware' => 'role:admin'], function () {
+        Route::group(['midleware' => 'role:admin'], function () {
             Route::post('add_course', [CourseController::class, 'addCourse']);
+            Route::get('get_course', [CourseController::class, 'getCourse']);
         });
         ###########End Admin Role group###########
     });
     ###########End courses group###########
+
+    ###########Start assignments group###########
+    Route::group(['prefix' => 'assignments'], function () {
+
+        ###########Start instructor Role group###########
+        Route::group(['midleware' => 'role:instructor'], function () {
+            Route::post('add_assignment', [AssignmentController::class, 'addAssignment']);
+            Route::get('get_assignment/{path}', [AssignmentController::class, 'getAssignment']);
+        });
+        ###########End instructor Role group###########
+    });
+    ###########End assignments group###########
+
 });
