@@ -36,6 +36,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::group(['midleware' => 'role:admin'], function () {
             Route::post('add_course', [CourseController::class, 'addCourse']);
             Route::get('get_course', [CourseController::class, 'getCourse']);
+            Route::get('assign/instructor/{instructor_id}/{course_id}', [CourseController::class, 'assignInstructorToCourse']);
+            Route::get('assign/student/{student_id}/{course_id}', [CourseController::class, 'assignStudentToCourse']);
         });
         ###########End Admin Role group###########
     });
