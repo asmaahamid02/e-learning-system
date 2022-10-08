@@ -17,10 +17,13 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role')->default('student');
-            $table->array('instructor_courses');
-            $table->array('student_courses');
-            $table->array('student_assignments');
+            $table->date('dob');
+            $table->string('phone_number');
+            $table->string('gender');
+            $table->object('role');
+            // $table->array('instructor_courses');
+            // $table->array('student_courses');
+            // $table->array('student_assignments');
             $table->timestamps();
         });
     }
