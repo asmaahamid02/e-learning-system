@@ -26,11 +26,11 @@ class Course extends Model
 
     public function instructors()
     {
-        return $this->belongsToMany(User::class, 'courses', 'course_id', 'instructor_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'users', 'course_id', 'instructor_id')->withTimestamps();
     }
 
     public function students()
     {
-        return $this->belongsToMany(User::class, 'courses', 'course_id', 'student_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'users', 'course_id', 'student_id')->withTimestamps();
     }
 }
