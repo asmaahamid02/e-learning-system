@@ -112,4 +112,31 @@ class CourseController extends Controller
             'status' =>  Response::HTTP_INTERNAL_SERVER_ERROR
         ]);
     }
+
+    public function getEnrolledCourses()
+    {
+        if (Auth::user()->role == 'student') {
+            $courses = Auth::user()->studentCourses;
+
+            if ($courses->isNotEmpty()) {
+                return response()->json([
+                    'data' => $courses,
+                    'message' => 'Courses found',
+                    'status' =>  Response::HTTP_OK
+                ]);
+            }
+            return response()->json([
+                'data' => null,
+                'message' => 'No Courses found',
+                'status' =>  Response::HTTP_NOT_FOUND
+            ]);
+        }
+
+        //if the user is not student
+        return response()->json([
+            'data' => null,
+            'message' => 'Only students can view their courses',
+            'status' =>  Response::HTTP_INTERNAL_SERVER_ERROR
+        ]);
+    }
 }
