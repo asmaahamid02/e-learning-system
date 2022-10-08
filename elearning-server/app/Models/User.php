@@ -12,13 +12,15 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $connection = 'mongodb';
-    protected $collection = 'users';
+
     protected $fillable = [
         'name',
         'email',
         'password',
         'role',
+        'dob',
+        'phone_number',
+        'gender',
         'instructor_courses',
         'student_courses',
         'student_assignments',
