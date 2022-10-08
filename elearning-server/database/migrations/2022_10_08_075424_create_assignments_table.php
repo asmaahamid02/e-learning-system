@@ -14,9 +14,9 @@ class CreateAssignmentsTable extends Migration
     public function up()
     {
         Schema::create('assignments', function (Blueprint $table) {
-            $table->integer('instructor');
+            $table->integer('instructor_id');
             $table->string('title');
-            $table->string('file_name');
+            $table->string('file_path');
             $table->date('deadline');
             $table->array('students');
             $table->timestamps();
