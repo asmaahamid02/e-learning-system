@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CourseController;
@@ -51,5 +52,16 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         ###########End instructor Role group###########
     });
     ###########End assignments group###########
+
+    ###########Start announcements group###########
+    Route::group(['prefix' => 'announcements'], function () {
+
+        ###########Start instructor Role group###########
+        Route::group(['midleware' => 'role:instructor'], function () {
+            Route::post('add_announcement', [AnnouncementController::class, 'addAnnouncement']);
+        });
+        ###########End instructor Role group###########
+    });
+    ###########End announcements group###########
 
 });
