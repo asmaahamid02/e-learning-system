@@ -13,7 +13,7 @@ class CreateAssignmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assignments', function (Blueprint $table) {
+        Schema::connection($this->connection)->create('collections',  function (Blueprint $table) {
             $table->integer('instructor');
             $table->string('title');
             $table->string('file_name');

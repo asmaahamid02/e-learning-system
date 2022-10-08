@@ -13,7 +13,7 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::connection($this->connection)->create('collections', function (Blueprint $table) {
             $table->string('code')->unique();
             $table->string('title');
             $table->string('subject');

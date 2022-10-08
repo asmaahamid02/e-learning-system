@@ -13,7 +13,7 @@ class CreateAnnouncementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::connection($this->connection)->create('collections', function (Blueprint $table) {
             $table->integer('instructor');
             $table->string('title');
             $table->text('announcement');
