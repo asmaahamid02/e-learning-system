@@ -19,4 +19,9 @@ class Assignment extends Model
         'file_path',
         'deadline',
     ];
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'users', 'assignment_id', 'student_id');
+    }
 }
