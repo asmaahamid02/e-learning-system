@@ -11,6 +11,14 @@ class UserInfo {
   getRole() {
     return JSON.parse(localStorage.getItem('user')).role
   }
+
+  setUser(user) {
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+
+  removeUser() {
+    localStorage.removeItem('user')
+  }
 }
 
 export default new UserInfo()
