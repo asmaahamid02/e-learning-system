@@ -9,6 +9,7 @@ import {
 import login from '../assets/images/login.png'
 import { useNavigate } from 'react-router-dom'
 import Auth from '../API/auth'
+import UserInfo from '../Services/UserInfo'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -55,6 +56,16 @@ const Login = () => {
     const response = await Auth.login(values.email, values.password)
     if (response.data.status < 400) {
       //success
+      const user = {
+        id: response.data.data.id,
+        name: response.data.data.name,
+        email: response.data.data.email,
+        role: response.data.data.role,
+        token: response.data.data.token,
+      }
+
+      //save user data in localstorage
+      UserInfo.setUser(user)
       setSubmitMessage(response.data.message)
       setIsValid(true)
     } else {
