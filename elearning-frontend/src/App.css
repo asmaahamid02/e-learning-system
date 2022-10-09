@@ -75,9 +75,26 @@ a {
   display: none;
 }
 
+.icon-dark {
+  color: #02416f;
+}
+
+.icon-green {
+  color: #02d664;
+}
+
+.icon-white {
+  color: #fff;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
 /*Login*/
 .login-container {
-  width: 300px;
+  width: 350px;
   margin: 100px auto 0 auto;
 }
 
@@ -87,22 +104,27 @@ a {
 
 .input-box {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
   background-color: #fff;
   border-radius: 4px;
-  height: 45px;
-  border: 1px solid #ddd;
   margin-bottom: 10px;
+}
+
+.inner-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  height: 45px;
+}
+
+.inner-input ~ span {
+  margin-left: 5px;
 }
 
 .prefix {
   padding: 0px 5px;
   width: 40px;
-}
-
-.prefix i {
-  color: #02d664;
 }
 
 .input {
