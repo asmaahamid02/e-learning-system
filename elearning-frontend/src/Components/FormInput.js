@@ -20,7 +20,9 @@ const FormInput = (props) => {
         />
       </div>
 
-      <span className={`error-message ${!props.errorMessage && 'hide'}`}>
+      <span
+        className={`display-message error ${!props.errorMessage && 'hide'}`}
+      >
         {props.errorMessage}
       </span>
     </div>
