@@ -226,3 +226,70 @@ form {
   font-size: 30px;
   font-weight: bold;
 }
+
+/*Grid items*/
+.items {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  grid-template-rows: 200px 200px;
+  justify-content: space-around;
+  align-items: center;
+  row-gap: 20px;
+  margin-top: 20px;
+}
+
+.item {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  padding: 12px 15px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.item > i {
+  height: 70%;
+  width: 100%;
+  font-size: 50px;
+}
+
+.item > h3 {
+  padding-top: 10px;
+  border-top: 2px solid rgba(231, 227, 227, 0.2);
+}
+
+.fa-circle-plus {
+  margin-right: 5px;
+}
+
+.purple {
+  background: linear-gradient(
+    90deg,
+    rgba(236, 15, 247, 1) 1%,
+    rgba(111, 2, 105, 1) 61%
+  );
+}
+
+.green {
+  background: linear-gradient(
+    90deg,
+    rgba(41, 227, 40, 1) 1%,
+    rgba(9, 129, 2, 1) 61%
+  );
+}
+
+.blue {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 191, 247, 1) 1%,
+    rgba(18, 96, 218, 1) 61%
+  );
+}
+
+.orange {
+  background: linear-gradient(
+    90deg,
+    rgba(247, 119, 15, 1) 1%,
+    rgba(218, 71, 18, 1) 61%
+  );
+}
