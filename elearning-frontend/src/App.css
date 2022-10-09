@@ -157,3 +157,29 @@ form {
 .input:focus {
   border: 2px solid #02d664;
 }
+
+/*Home page*/
+.logo {
+  cursor: pointer;
+}
+
+.logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: 200px auto;
+  height: 100%;
+}
+
+.left-sidebar {
+  border-right: 1px solid #ddd;
+}
+
+.middle-content {
+  justify-content: space-between;
+}
