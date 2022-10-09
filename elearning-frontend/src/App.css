@@ -74,3 +74,49 @@ a {
 .hide {
   display: none;
 }
+
+/*Login*/
+.login-container {
+  width: 300px;
+  margin: 100px auto 0 auto;
+}
+
+.login-form {
+  margin-top: 15px;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  height: 45px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.prefix {
+  padding: 0px 5px;
+  width: 40px;
+}
+
+.prefix i {
+  color: #02d664;
+}
+
+.input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  padding: 5px;
+  height: 100%;
+  border-left: 1px solid #ddd;
+  color: #02416f;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.input:focus {
+  border: 2px solid #02d664;
+}
