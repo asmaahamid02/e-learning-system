@@ -87,12 +87,27 @@ a {
   color: #fff;
 }
 
-.error-message {
-  color: red;
+.display-message {
+  margin-bottom: 10px;
   font-size: 12px;
 }
 
+.error {
+  color: red;
+}
+
+.succes {
+  color: #02d664;
+}
+
+.center {
+  text-align: center;
+}
+
 /*Login*/
+form {
+  margin-top: 10px;
+}
 .login-container {
   width: 350px;
   margin: 100px auto 0 auto;
