@@ -1,12 +1,30 @@
 import logoImg from '../assets/images/login.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import UserInfo from '../Services/UserInfo'
+import { Navigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
 import {
   faUser,
   faRightFromBracket,
   faUserPlus,
   faCirclePlus,
+  faUserGraduate,
+  faShapes,
 } from '@fortawesome/free-solid-svg-icons'
 const Home = () => {
+  const [loggedIn, setLoggedIn] = useState(false)
+  useEffect(() => {
+    const loggedInUser = UserInfo.getUser()
+    if (loggedInUser) {
+      setLoggedIn(true)
+    }
+  }, [])
+
+  if (!loggedIn) {
+    return <Navigate replace to='/' />
+  }
+
   return (
     <div className='main-container'>
       <div className='left-sidebar'>
@@ -41,21 +59,21 @@ const Home = () => {
         <div className='content'>
           <div className='items'>
             <div className='item purple'>
-              <FontAwesomeIcon icon={faUserPlus} />
+              <FontAwesomeIcon icon={faUserPlus} className='box-icon' />
               <h3>
                 <FontAwesomeIcon icon={faCirclePlus} />
                 Add Students
               </h3>
             </div>
             <div className='item green'>
-              <i className='fa fa-shapes'></i>
+              <FontAwesomeIcon icon={faShapes} className='box-icon' />
               <h3>
                 <FontAwesomeIcon icon={faCirclePlus} />
                 Assign Courses to Students
               </h3>
             </div>
             <div className='item blue'>
-              <i className='fa fa-user-graduate'></i>
+              <FontAwesomeIcon icon={faUserGraduate} className='box-icon' />
               <h3>
                 <FontAwesomeIcon icon={faCirclePlus} />
                 View Students
