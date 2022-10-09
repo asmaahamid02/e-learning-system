@@ -21,3 +21,56 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+/*Utilities*/
+.header {
+  margin-bottom: 10px;
+  padding: 10px 12px;
+}
+
+.header-title {
+  font-size: 30px;
+  text-align: center;
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(2, 214, 100, 1) 1%,
+    rgba(2, 65, 111, 1) 61%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn {
+  padding: 15px 20px;
+  font-size: 15px;
+  border: none;
+  background-color: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-large {
+  width: 100%;
+}
+
+.btn-dark {
+  color: #fff;
+  background-color: #02416f;
+}
+
+.btn-green {
+  color: #fff;
+  background-color: #02d664;
+}
+
+.flex {
+  display: flex;
+}
+
+.center-vertical {
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
