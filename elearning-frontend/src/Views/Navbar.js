@@ -1,11 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import UserInfo from '../Services/UserInfo'
-import { Navigate } from 'react-router-dom'
+import { Navigate, Link, NavLink } from 'react-router-dom'
 
 const Navbar = (props) => {
+  const handleHomeClick = () => {
+    return <Navigate replace to='/home' />
+    // window.location.reload()
+  }
+
+  const handleLogout = () => {
+    UserInfo.removeUser()
+    props.setLoggedInUser(null)
+  }
   return (
     <div className='navbar flex center-vertical'>
-      <div className='username' onClick={props.handleHomeClick}>
+      <div className='username flex' onClick={handleHomeClick}>
         <FontAwesomeIcon icon={props.userIcon} size={props.userIconSize} />
         <span>{UserInfo.getName()}</span>
       </div>
@@ -13,12 +22,12 @@ const Navbar = (props) => {
         {props.items.map((item, index) => {
           return (
             <li key={index} className={item.active ? 'active' : ''}>
-              {item.name}
+              <Link to={`/${item.name}`}>{item.name.toUpperCase()}</Link>
             </li>
           )
         })}
       </ul>
-      <div className='logout' onClick={props.handleLogout}>
+      <div className='logout' onClick={handleLogout}>
         <FontAwesomeIcon icon={props.logoutIcon} size={props.logoutIconSize} />
       </div>
     </div>
