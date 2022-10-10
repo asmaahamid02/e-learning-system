@@ -15,7 +15,67 @@ import Navbar from './Navbar'
 
 const Home = () => {
   const [loggedInUser, setLoggedInUser] = useState(UserInfo.getUser())
+  const userRole = UserInfo.getRole()
+  const navItemsObj = {
+    admin: [
+      {
+        id: 1,
+        name: 'instructors',
+        active: true,
+      },
+      {
+        id: 2,
+        name: 'students',
+        active: false,
+      },
+      {
+        id: 3,
+        name: 'courses',
+        active: false,
+      },
+    ],
+    instructor: [
+      {
+        id: 1,
+        name: 'students',
+        active: true,
+      },
+      {
+        id: 2,
+        name: 'courses',
+        active: false,
+      },
+      {
+        id: 3,
+        name: 'assignments',
+        active: false,
+      },
+      {
+        id: 4,
+        name: 'announcements',
+        active: false,
+      },
+    ],
+    student: [
+      {
+        id: 1,
+        name: 'courses',
+        active: true,
+      },
+      {
+        id: 2,
+        name: 'assignments',
+        active: false,
+      },
+      {
+        id: 3,
+        name: 'announcements',
+        active: false,
+      },
+    ],
+  }
 
+  const [navItems, setNavItems] = useState(navItemsObj[userRole])
   const checkLoggedIn = () => {
     if (!loggedInUser) {
       return <Navigate replace to='/' />
@@ -32,30 +92,13 @@ const Home = () => {
     setLoggedInUser(UserInfo.getUser())
   })
 
-  const handleLogout = () => {
-    UserInfo.removeUser()
-    setLoggedInUser(null)
+  const handleItemClick = (e) => {
+    // console.log(e.target)
+    // setNavItems([...navItems, { [e.target.id]: true }])
   }
 
-  const handleHomeClick = () => {
-    return <Navigate replace to='/home' />
-    // window.location.reload()
-  }
-
-  const navItems = [
-    {
-      name: 'Instructors',
-      active: true,
-    },
-    {
-      name: 'Students',
-      active: false,
-    },
-    {
-      name: 'Courses',
-      active: false,
-    },
-  ]
+  //   useEffect(() => {}, [navItems])
+  console.log(loggedInUser)
   if (!loggedInUser) {
     return <Navigate replace to='/' />
   }
@@ -74,8 +117,7 @@ const Home = () => {
           items={navItems}
           logoutIcon={faRightFromBracket}
           logoutIconSize='xl'
-          handleLogout={handleLogout}
-          handleHomeClick={handleHomeClick}
+          setLoggedInUser={setLoggedInUser}
         />
         <div className='content'>
           <div className='items'>
