@@ -196,6 +196,7 @@ form {
   font-size: 20px;
   margin-left: 5px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .list {
@@ -209,6 +210,9 @@ form {
   text-align: center;
   color: #02416f;
   padding: 10px 20px;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .active {
@@ -222,9 +226,8 @@ form {
   margin-right: 0;
 }
 
-.list > li > a {
-  font-size: 30px;
-  font-weight: bold;
+.logout {
+  cursor: pointer;
 }
 
 /*Grid items*/
