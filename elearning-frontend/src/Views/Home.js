@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import UserInfo from '../Services/UserInfo'
 import { Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-
 import {
   faUser,
   faRightFromBracket,
@@ -12,19 +11,54 @@ import {
   faUserGraduate,
   faShapes,
 } from '@fortawesome/free-solid-svg-icons'
-const Home = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
-  useEffect(() => {
-    const loggedInUser = UserInfo.getUser()
-    if (loggedInUser) {
-      setLoggedIn(true)
-    }
-  }, [])
+import Navbar from './Navbar'
 
-  if (!loggedIn) {
-    return <Navigate replace to='/' />
+const Home = () => {
+  const [loggedInUser, setLoggedInUser] = useState(UserInfo.getUser())
+
+  const checkLoggedIn = () => {
+    if (!loggedInUser) {
+      return <Navigate replace to='/' />
+    } else {
+      console.log('logged')
+    }
   }
 
+  useEffect(() => {
+    checkLoggedIn()
+  }, [loggedInUser])
+
+  window.addEventListener('storage', () => {
+    setLoggedInUser(UserInfo.getUser())
+  })
+
+  const handleLogout = () => {
+    UserInfo.removeUser()
+    setLoggedInUser(null)
+  }
+
+  const handleHomeClick = () => {
+    return <Navigate replace to='/home' />
+    // window.location.reload()
+  }
+
+  const navItems = [
+    {
+      name: 'Instructors',
+      active: true,
+    },
+    {
+      name: 'Students',
+      active: false,
+    },
+    {
+      name: 'Courses',
+      active: false,
+    },
+  ]
+  if (!loggedInUser) {
+    return <Navigate replace to='/' />
+  }
   return (
     <div className='main-container'>
       <div className='left-sidebar'>
@@ -34,28 +68,15 @@ const Home = () => {
         </div>
       </div>
       <div className='middle-content'>
-        <div className='navbar flex center-vertical'>
-          <div className='username'>
-            <FontAwesomeIcon icon={faUser} size='xl' />
-            <span>Asmaa Hamid</span>
-          </div>
-          <ul className='list flex'>
-            <li>
-              <a href='#'>Instructors</a>
-            </li>
-            <li className='active'>
-              <a href='#'>Students</a>
-            </li>
-            <li>
-              <a href='#'>Courses</a>
-            </li>
-          </ul>
-          <div className='logout'>
-            <a href='#'>
-              <FontAwesomeIcon icon={faRightFromBracket} size='xl' />
-            </a>
-          </div>
-        </div>
+        <Navbar
+          userIcon={faUser}
+          userIconSize='xl'
+          items={navItems}
+          logoutIcon={faRightFromBracket}
+          logoutIconSize='xl'
+          handleLogout={handleLogout}
+          handleHomeClick={handleHomeClick}
+        />
         <div className='content'>
           <div className='items'>
             <div className='item purple'>
