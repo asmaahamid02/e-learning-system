@@ -63,19 +63,6 @@ const Navbar = (props) => {
             </li>
           </>
         )}
-        {/* {props.items.map((item, index) => {
-          return (
-            <li
-              key={index}
-              className={item.active ? 'active' : ''}
-              onClick={props.handleItemClick}
-            >
-              <Link to={`/${index ? item.name : 'home'}`}>
-              {item.name.toUpperCase()}
-              </Link>
-            </li>
-          )
-        })} */}
       </ul>
       <div className='logout' onClick={handleLogout}>
         <FontAwesomeIcon icon={props.logoutIcon} size={props.logoutIconSize} />
