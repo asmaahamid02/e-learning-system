@@ -2,7 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Box = (props) => {
   return (
-    <div className={`item ${props.color}`}>
+    <div
+      key={props.id}
+      className={`item ${props.color}`}
+      onClick={props.onClick}
+    >
       <FontAwesomeIcon icon={props.iconTop} className='box-icon' />
       <h3>
         <FontAwesomeIcon icon={props.iconBottom} />
