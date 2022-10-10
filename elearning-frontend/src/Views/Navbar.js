@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import UserInfo from '../Services/UserInfo'
-import { Navigate, Link, NavLink } from 'react-router-dom'
+import { Navigate, Link } from 'react-router-dom'
 
 const Navbar = (props) => {
   const handleHomeClick = () => {
@@ -19,13 +19,63 @@ const Navbar = (props) => {
         <span>{UserInfo.getName()}</span>
       </div>
       <ul className='list flex'>
-        {props.items.map((item, index) => {
+        {UserInfo.getRole() == 'admin' && (
+          <>
+            <li>
+              <Link to='/home'>Instructors</Link>
+            </li>
+            <li>
+              <Link to='/students'>Students</Link>
+            </li>
+            <li>
+              <Link to='/courses'>Courses</Link>
+            </li>
+          </>
+        )}
+
+        {UserInfo.getRole() == 'instructor' && (
+          <>
+            <li>
+              <Link to='/home'>Students</Link>
+            </li>
+            <li>
+              <Link to='/courses'>Courses</Link>
+            </li>
+            <li>
+              <Link to='/assignments'>Assignments</Link>
+            </li>
+            <li>
+              <Link to='/announcements'>Announcements</Link>
+            </li>
+          </>
+        )}
+
+        {UserInfo.getRole() == 'student' && (
+          <>
+            <li>
+              <Link to='/home'>Courses</Link>
+            </li>
+            <li>
+              <Link to='/assignments'>Assignments</Link>
+            </li>
+            <li>
+              <Link to='/announcements'>Announcements</Link>
+            </li>
+          </>
+        )}
+        {/* {props.items.map((item, index) => {
           return (
-            <li key={index} className={item.active ? 'active' : ''}>
-              <Link to={`/${item.name}`}>{item.name.toUpperCase()}</Link>
+            <li
+              key={index}
+              className={item.active ? 'active' : ''}
+              onClick={props.handleItemClick}
+            >
+              <Link to={`/${index ? item.name : 'home'}`}>
+              {item.name.toUpperCase()}
+              </Link>
             </li>
           )
-        })}
+        })} */}
       </ul>
       <div className='logout' onClick={handleLogout}>
         <FontAwesomeIcon icon={props.logoutIcon} size={props.logoutIconSize} />
