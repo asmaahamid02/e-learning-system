@@ -9,11 +9,13 @@ class UserInfo {
   }
 
   getRole() {
-    return JSON.parse(localStorage.getItem('user')).role
+    const user = JSON.parse(localStorage.getItem('user'))
+    return user?.role
   }
 
   getName() {
-    return JSON.parse(localStorage.getItem('user')).name
+    const user = JSON.parse(localStorage.getItem('user'))
+    return user?.name
   }
 
   setUser(user) {
