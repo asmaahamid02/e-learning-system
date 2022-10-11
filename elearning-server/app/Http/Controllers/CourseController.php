@@ -139,4 +139,33 @@ class CourseController extends Controller
             'status' =>  Response::HTTP_INTERNAL_SERVER_ERROR
         ]);
     }
+
+    public function getInstructorCourses($instructor_id)
+    {
+        $instructor =  User::where('_id', $instructor_id)->first();
+
+        if ($instructor) {
+            $courses = $instructor->instructorCourses;
+
+            if ($courses->isNotEmpty()) {
+
+                return response()->json([
+                    'data' => $courses,
+                    'message' => 'Courses found',
+                    'status' =>  Response::HTTP_OK
+                ]);
+            }
+            return response()->json([
+                'data' => null,
+                'message' => 'No Courses found',
+                'status' =>  Response::HTTP_NOT_FOUND
+            ]);
+        }
+
+        return response()->json([
+            'data' => null,
+            'message' => 'Instructor not found',
+            'status' =>  Response::HTTP_NOT_FOUND
+        ]);
+    }
 }
