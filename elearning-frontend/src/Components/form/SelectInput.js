@@ -2,6 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 const SelectInput = (props) => {
   const [options, setOptions] = useState(props.options)
+
+  useEffect(() => {
+    setOptions(props.options)
+  }, [props.options])
   return (
     <div className='input-box'>
       <div className='inner-input'>
