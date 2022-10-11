@@ -14,5 +14,8 @@ An E-learning system using Laravel, React and MongoDB
 
 <img src='./README/1.PNG'>
 <img src='./README/2.PNG'>
-<img src='./README/4.PNG'>
 <img src='./README/3.PNG'>
+<img src='./README/4.PNG'>
+<img src='./README/5.PNG'>
+<img src='./README/6.PNG'>
+<img src='./README/7.PNG'>
