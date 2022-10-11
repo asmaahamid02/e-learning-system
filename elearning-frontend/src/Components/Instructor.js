@@ -12,16 +12,84 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import UserInfo from '../Services/UserInfo'
 import { Navigate } from 'react-router-dom'
-import ModalForm from './ModalForm'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import FormInput from './FormInput'
 import SelectInput from './SelectInput'
+import User from '../API/user'
+import Course from '../API/courses'
 
 const Instructor = (props) => {
+  const genderOptions = [
+    { name: 'female', value: 'female' },
+    { name: 'male', value: 'male' },
+  ]
+  const [options, setOptions] = useState(genderOptions)
+  const [instructorOptions, setInstructorOptions] = useState([])
+  const [courseOptions, setCourseOptions] = useState([])
+
+  /*
+  Note: useCallback hook it will re-render on every update which will result in triggering the useEffect hook again.
+*/
+
+  //to fill instructors options
+  const fetchInstructors = useCallback(async () => {
+    try {
+      const response = await User.getInstructors()
+
+      console.log(response)
+      let newOptions = []
+      if (response.status == 200) {
+        if (!response.data) {
+          newOptions.push({ value: '', name: response.message })
+        } else {
+          response.data.map((instructor) => {
+            newOptions.push({ name: instructor.name, value: instructor._id })
+          })
+        }
+        setInstructorOptions(newOptions)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
+
+  //to fill courses options
+  const fetchCourses = useCallback(async () => {
+    try {
+      const response = await Course.getCourses()
+      let newOptions = []
+      if (response.status == 200) {
+        if (!response.data) {
+          newOptions.push({ value: '', name: response.message })
+        } else {
+          response.data.map((course) => {
+            newOptions.push({
+              name: `${course.title} (${course.code})`,
+              value: course._id,
+            })
+          })
+        }
+        setCourseOptions(newOptions)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchInstructors()
+  }, [fetchInstructors])
+
+  useEffect(() => {
+    fetchCourses()
+  }, [fetchCourses])
+
   if (UserInfo.getRole() != 'admin') {
     return <Navigate replace to='/home' />
   }
 
-  const AddInstructorsInputs = {
+  //add course form components
+  const addInstructorsInputs = {
     title: 'Add Instructors',
     buttonText: 'Add',
     showModal: true,
@@ -60,7 +128,7 @@ const Instructor = (props) => {
         iconClass='icon-green'
         iconSize='lg'
         name='gender'
-        options={['female', 'male']}
+        options={options}
       />,
       <FormInput
         icon={faCalendar}
@@ -91,34 +159,39 @@ const Instructor = (props) => {
     ],
   }
 
-  const AssignCourseToInstructors = {
+  //assign Course To Instructors form components
+  const assignCourseToInstructors = {
     title: 'Assign Courses to Instructors',
     buttonText: 'Assign',
     showModal: true,
     inputs: [
       <SelectInput
+        icon={faUsers}
+        iconClass='icon-green'
+        iconSize='lg'
+        name='course'
+        options={instructorOptions}
+      />,
+      <SelectInput
         icon={faShapes}
         iconClass='icon-green'
         iconSize='lg'
         name='course'
-        options={['course1', 'course2']}
-      />,
-      <SelectInput
-        icon={faUsers}
-        iconClass='icon-green'
-        iconSize='lg'
-        name='instructors'
-        options={['instructor1', 'instructor2']}
+        options={courseOptions}
       />,
     ],
   }
+
+  //Box onClick function to render the right modal
   const fillInputs = (e) => {
     if (e.currentTarget.textContent.includes('Add')) {
-      props.setModalProps(AddInstructorsInputs)
+      setOptions([...genderOptions])
+      props.setModalProps(addInstructorsInputs)
     } else if (e.currentTarget.textContent.includes('Assign')) {
-      props.setModalProps(AssignCourseToInstructors)
+      props.setModalProps(assignCourseToInstructors)
     }
   }
+
   return (
     <>
       <Box
