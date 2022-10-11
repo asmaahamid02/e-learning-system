@@ -18,9 +18,9 @@ class Assignment {
     }
   }
 
-  async submitAssignment(assignment_file, id) {
+  async submitAssignment(data, id) {
     try {
-      return await api.post('assignments/submit' + id, { assignment_file })
+      return await api.post('assignments/submit/' + id, data)
     } catch (error) {
       return error
     }
