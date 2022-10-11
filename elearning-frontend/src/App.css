@@ -313,8 +313,9 @@ form {
 }
 
 .modal-container {
-  width: 600px;
-  height: 600px;
+  min-width: 600px;
+  max-width: 75%;
+  height: 650px;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: rgb(0, 0, 0, 0.35) 0 5px 15px;
@@ -329,10 +330,30 @@ form {
 
 .modal-body {
   flex-grow: 1;
-  margin-top: 20px;
+  margin: 20px 0;
   overflow-y: auto;
 }
 
 .modal-footer {
   justify-content: flex-end;
+}
+
+/*Table*/
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  text-align: left;
+  padding: 8px;
+  color: #02416f;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f6f6f6;
 }
