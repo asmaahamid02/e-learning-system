@@ -12,11 +12,14 @@ const Course = (props) => {
   const [showAddCourse, setShowAddCourse] = useState(true)
   const [showDropCourse, setshowDropCourse] = useState(false)
 
-  if (UserInfo.getRole() == 'student' || UserInfo.getRole() == 'instructor') {
+  if (
+    (UserInfo.getRole() == 'student' || UserInfo.getRole() == 'instructor') &&
+    showAddCourse
+  ) {
     setShowAddCourse(false)
   }
 
-  if (UserInfo.getRole() == 'student') {
+  if (UserInfo.getRole() == 'student' && !showDropCourse) {
     setshowDropCourse(true)
   }
 
