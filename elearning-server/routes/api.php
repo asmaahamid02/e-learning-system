@@ -69,14 +69,14 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 
         ###########Start instructor Role group###########
         Route::group(['midleware' => 'role:instructor'], function () {
-            Route::post('add_assignment', [AssignmentController::class, 'addAssignment']);
-            Route::get('get_assignment/{path}', [AssignmentController::class, 'getAssignmentFile'])->where('path', '.*');;
+            Route::post('/', [AssignmentController::class, 'addAssignment']);
+            Route::get('/{path}', [AssignmentController::class, 'getAssignmentFile'])->where('path', '.*');;
         });
         ###########End instructor Role group###########
 
         ###########Start student Role group###########
         Route::group(['midleware' => 'role:student'], function () {
-            Route::post('submit_assignment/{id}', [AssignmentController::class, 'submitAssignment']);
+            Route::post('submit/{id}', [AssignmentController::class, 'submitAssignment']);
         });
         ###########End student Role group###########
 
