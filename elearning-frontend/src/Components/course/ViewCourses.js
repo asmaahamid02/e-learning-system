@@ -1,6 +1,7 @@
 import Table from '../Table'
 import { useState, useCallback, useEffect } from 'react'
 import Course from '../../API/courses'
+import UserInfo from '../../Services/UserInfo'
 
 const ViewCourses = () => {
   /*CONSTANTS*/
@@ -9,9 +10,14 @@ const ViewCourses = () => {
 
   console.log(courses)
   //to fill instructors options
+
   const fetchCourses = useCallback(async () => {
     try {
-      const response = await Course.getCourses()
+      let response = await Course.getCourses()
+
+      if (UserInfo.getRole() == 'student') {
+        response = await Course.getEnrolledCourses()
+      }
       console.log(response.data)
       let output = []
       if (response.status == 200) {
