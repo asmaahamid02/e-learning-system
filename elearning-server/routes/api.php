@@ -30,6 +30,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         ###########Start admin, instructor roles group###########
         Route::group(['middleware' => 'role:admin, instructor'], function () {
             Route::post('add_user', [UserController::class, 'addUser']);
+            Route::get('/students', [UserController::class, 'getStudents']);
         });
         ###########Start admin, instructor roles group###########
 
