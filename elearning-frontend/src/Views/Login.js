@@ -1,5 +1,5 @@
-import FormInput from '../Components/FormInput'
-import Button from '../Components/Button'
+import FormInput from '../Components/form/FormInput'
+import Button from '../Components/form/Button'
 import { useState, useEffect } from 'react'
 import {
   faEnvelope,
