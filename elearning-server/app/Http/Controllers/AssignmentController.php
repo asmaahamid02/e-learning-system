@@ -17,7 +17,7 @@ class AssignmentController extends Controller
         //validate the input data
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            // 'assignment_file' => 'required',
+            'assignment_file' => 'required|mimes:pdf,svg,docx|max:10000',
             'deadline' => 'required|date|after:' . Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
@@ -38,7 +38,9 @@ class AssignmentController extends Controller
         //store the file
         // Storage::disk('public')->put('users/assignments/' . $decoded_file['file_name'], $decoded_file['file_data']);
 
+        $path = Storage::putFile('assignments', $request->assignment_file);
 
+        $assignment->file_path = $path;
         $assignment->save();
 
         return response()->json([
@@ -65,9 +67,11 @@ class AssignmentController extends Controller
         ];
     }
 
-    public function getAssignmentFile($file)
+    public function getAssignmentFile($path)
     {
-        return response(asset('storage/users/assignments/' . $file), 200);
+        $file = Storage::get($path);
+        return response($file, 200)->header('Content-Type', Storage::getMimeType($path));
+        // return response(asset('storage/users/assignments/' . $file), 200);
     }
 
     public function submitAssignment(Request $request, $id)
