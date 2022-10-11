@@ -45,4 +45,42 @@ class UserController extends Controller
             'status' =>  Response::HTTP_OK
         ]);
     }
+
+    public function getInstructors()
+    {
+        $instructors = User::where('role', 'instructor')->orderBy('created_at', 'DESC')->get();
+
+        if ($instructors->isNotEmpty()) {
+            return response()->json([
+                'data' => $instructors,
+                'message' => 'Found',
+                'status' =>  Response::HTTP_OK
+            ]);
+        }
+
+        return response()->json([
+            'data' => null,
+            'message' => 'No Instructors',
+            'status' => Response::HTTP_OK
+        ]);
+    }
+
+    public function getStudents()
+    {
+        $students = User::where('role', 'student')->orderBy('created_at', 'DESC')->get();
+
+        if ($students->isNotEmpty()) {
+            return response()->json([
+                'data' => $students,
+                'message' => 'Found',
+                'status' =>  Response::HTTP_OK
+            ]);
+        }
+
+        return response()->json([
+            'data' => null,
+            'message' => 'No Instructors',
+            'status' => Response::HTTP_OK
+        ]);
+    }
 }
