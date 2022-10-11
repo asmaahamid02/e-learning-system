@@ -80,11 +80,11 @@ class AssignmentController extends Controller
             $student_id = Auth::id();
             $assignment = Assignment::where('_id', $id)->first();
 
-            if ($assignment && $assignment->deadline > Carbon::now()->format('Y-m-d H:i:s')) {
+            if ($assignment /*&& $assignment->deadline > Carbon::now()->format('Y-m-d H:i:s')*/) {
 
                 //validate the input data
                 $validator = Validator::make($request->all(), [
-                    'assignment_file' => 'required',
+                    'assignment_file' => 'required|mimes:pdf,svg,docx|max:10000',
                 ]);
 
                 //return the validator errors
@@ -99,11 +99,13 @@ class AssignmentController extends Controller
                 //submit assignment
                 //check if already submitted
                 if (!$assignment->students->contains($student_id)) {
-                    $assignment->students()->attach($student_id, ['assignment_file', $request->assignment_file]);
+                    $path = Storage::putFile('assignments/' + Auth::id() + '/', $request->assignment_file);
+
+                    $assignment->students()->attach($student_id, ['assignment_file', $path]);
 
                     return response()->json([
                         'data' => Auth::user()->studentAssignments,
-                        'message' => 'You have submitted your assignment Successfully',
+                        'message' => 'Assignment Submitted Successfully',
                         'status' =>  Response::HTTP_OK
                     ]);
                 }
