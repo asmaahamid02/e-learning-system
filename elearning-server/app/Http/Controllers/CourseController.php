@@ -168,4 +168,23 @@ class CourseController extends Controller
             'status' =>  Response::HTTP_NOT_FOUND
         ]);
     }
+
+    public function getCourses()
+    {
+        $courses =  Course::orderBy('code')->get();
+
+        if ($courses->isNotEmpty()) {
+
+            return response()->json([
+                'data' => $courses,
+                'message' => 'Courses found',
+                'status' =>  Response::HTTP_OK
+            ]);
+        }
+        return response()->json([
+            'data' => null,
+            'message' => 'No Courses found',
+            'status' =>  Response::HTTP_NOT_FOUND
+        ]);
+    }
 }
