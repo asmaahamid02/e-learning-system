@@ -6,6 +6,7 @@ import ViewInstructors from './instructors/ViewInstructors'
 import ViewStudents from './student/ViewStudents'
 import AddCourseForm from './course/AddCourseForm'
 import ViewCourses from './course/ViewCourses'
+import SubmitAssignmentForm from './assignment/SubmitAssignmentForm'
 
 const ModalForm = (props) => {
   const handleModalShow = () => {
@@ -40,6 +41,7 @@ const ModalForm = (props) => {
             {props.modalForm == 'viewStudents' && <ViewStudents />}
             {props.modalForm == 'addCourse' && <AddCourseForm />}
             {props.modalForm == 'viewCourses' && <ViewCourses />}
+            {props.modalForm == 'submitAssignemt' && <SubmitAssignmentForm />}
           </>
         </div>
         <div className='modal-footer flex'>
