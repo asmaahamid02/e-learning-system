@@ -4,6 +4,7 @@ import Login from './Views/Login'
 import Home from './Views/Home'
 import StudentPage from './Views/StudentPage'
 import CoursePage from './Views/CoursePage'
+import AssignmentPage from './Views/AssignementPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
         <Route path='/students' element={<StudentPage />} />
         <Route path='/instructors' element={<>instructors</>} />
         <Route path='/courses' element={<CoursePage />} />
-        <Route path='/assignments' element={<>assignments</>} />
+        <Route path='/assignments' element={<AssignmentPage />} />
         <Route path='/announcements' element={<>announcements</>} />
       </Routes>
     </BrowserRouter>

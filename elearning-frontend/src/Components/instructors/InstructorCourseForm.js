@@ -43,6 +43,7 @@ const AddInstructorsForm = (props) => {
   const fetchCourses = useCallback(async () => {
     try {
       const response = await Course.getCourses()
+      console.log(response.data)
       let newOptions = []
       if (response.status == 200) {
         if (!response.data) {
