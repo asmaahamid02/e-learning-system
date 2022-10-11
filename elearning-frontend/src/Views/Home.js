@@ -4,9 +4,9 @@ import { Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import Navbar from './Navbar'
-import Instructor from '../Components/Instructor'
-import Student from '../Components/Student'
-import Course from '../Components/Course'
+import Instructor from '../Components/instructors/Instructor'
+import Student from '../Components/student/Student'
+import Course from '../Components/course/Course'
 import ModalForm from '../Components/ModalForm'
 
 const Home = (props) => {
@@ -14,6 +14,7 @@ const Home = (props) => {
 
   const [modalProps, setModalProps] = useState(null)
   const [showModal, setShowModal] = useState(false)
+  const [modalForm, setModalForm] = useState('')
 
   const checkLoggedIn = () => {
     if (!loggedInUser) {
@@ -38,7 +39,13 @@ const Home = (props) => {
     return <Navigate replace to='/' />
   }
 
-  let content = <Instructor setModalProps={setModalProps} />
+  let content = (
+    <Instructor
+      setModalProps={setModalProps}
+      setModalForm={setModalForm}
+      setShowModal={setShowModal}
+    />
+  )
   if (UserInfo.getRole() == 'instructor') {
     content = <Student />
   } else if (UserInfo.getRole() == 'student') {
@@ -66,13 +73,11 @@ const Home = (props) => {
           </div>
         </div>
       </div>
-      {modalProps && modalProps.showModal && (
+      {showModal && (
         <ModalForm
           title={modalProps.title}
-          inputs={modalProps.inputs}
-          buttonText={modalProps.buttonText}
-          setModalProps={setModalProps}
-          modalProps={modalProps}
+          setShowModal={setShowModal}
+          modalForm={modalForm}
         />
       )}
     </>
