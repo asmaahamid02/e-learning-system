@@ -49,7 +49,13 @@ const Home = (props) => {
   if (UserInfo.getRole() == 'instructor') {
     content = <Student />
   } else if (UserInfo.getRole() == 'student') {
-    content = <Course />
+    content = (
+      <Course
+        setModalProps={setModalProps}
+        setModalForm={setModalForm}
+        setShowModal={setShowModal}
+      />
+    )
   }
   return (
     <>
