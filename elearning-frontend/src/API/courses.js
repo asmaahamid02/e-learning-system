@@ -27,6 +27,15 @@ class Course {
       return error
     }
   }
+
+  async getEnrolledCourses() {
+    try {
+      const response = await api.get('courses/get_courses')
+      return response.data
+    } catch (error) {
+      return error
+    }
+  }
 }
 
 export default new Course()
