@@ -4,10 +4,15 @@ import { Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import Navbar from './Navbar'
-import Course from '../Components/Course'
+import Course from '../Components/course/Course'
+import ModalForm from '../Components/ModalForm'
 
 const CoursePage = () => {
   const [loggedInUser, setLoggedInUser] = useState(UserInfo.getUser())
+
+  const [modalProps, setModalProps] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+  const [modalForm, setModalForm] = useState('')
 
   const checkLoggedIn = () => {
     if (!loggedInUser) {
@@ -30,26 +35,43 @@ const CoursePage = () => {
   }
 
   return (
-    <div className='main-container'>
-      <div className='left-sidebar'>
-        <div className='header flex center-vertical logo'>
-          <img className='logo-img' src={logoImg} alt='logo' />
-          <h1 className='header-title'>LearnIt</h1>
+    <>
+      <div className='main-container'>
+        <div className='left-sidebar'>
+          <div className='header flex center-vertical logo'>
+            <img className='logo-img' src={logoImg} alt='logo' />
+            <h1 className='header-title'>LearnIt</h1>
+          </div>
+        </div>
+        <div className='middle-content'>
+          <Navbar
+            userIcon={faUser}
+            userIconSize='xl'
+            logoutIcon={faRightFromBracket}
+            logoutIconSize='xl'
+            setLoggedInUser={setLoggedInUser}
+          />
+          <div className='content'>
+            <div className='items'>
+              {
+                <Course
+                  setModalProps={setModalProps}
+                  setModalForm={setModalForm}
+                  setShowModal={setShowModal}
+                />
+              }
+            </div>
+          </div>
         </div>
       </div>
-      <div className='middle-content'>
-        <Navbar
-          userIcon={faUser}
-          userIconSize='xl'
-          logoutIcon={faRightFromBracket}
-          logoutIconSize='xl'
-          setLoggedInUser={setLoggedInUser}
+      {showModal && (
+        <ModalForm
+          title={modalProps.title}
+          setShowModal={setShowModal}
+          modalForm={modalForm}
         />
-        <div className='content'>
-          <div className='items'>{<Course />}</div>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 
